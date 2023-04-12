@@ -1,0 +1,62 @@
+<%- include("partials/header"); -%>
+<%- include("partials/navbar"); -%>
+<div class="container mb-5">
+  <form action="/order" method="post">
+    <h1 class="text-center">New Order</h1>
+    <fieldset>
+      <legend>Select From location</legend>
+      <div class="mb-3">
+        <input type="text" name="fromlocationName" class="form-control" id="fromLocationName" placeholder="Location Name *" required>
+      </div>
+      <div class="mb-3">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="fromlatitude" class="form-control" id="fromLatitude" placeholder="Latitude *" required >
+          </div>
+          <div class="col">
+            <input type="text" name="fromlongitude" class="form-control" id="fromLongitude" placeholder="Longitude *" required >
+          </div>
+        </div>
+      </div>
+      <div id="frommap" class="mb-3" style="height: 480px;"></div>
+      <button class="btn btn-outline-primary mb-3" id="fromBtn">Confirm Location</button>
+    </fieldset>
+    <fieldset>
+      <legend>Select To location</legend>
+      <div class="mb-3">
+        <input type="text" name="tolocationName" class="form-control" id="toLocationName" placeholder="Location Name *" required>
+      </div>
+      <div class="mb-3">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="tolatitude" class="form-control" id="toLatitude" placeholder="Latitude *" required >
+          </div>
+          <div class="col">
+            <input type="text" name="tolongitude" class="form-control" id="toLongitude" placeholder="Longitude *" required >
+          </div>
+        </div>
+      </div>
+      <div id="tomap" class="mb-3" style="height: 480px;"></div>
+      <button class="btn btn-outline-primary mb-3" id="toBtn">Confirm Location</button>
+    </fieldset>
+    <fieldset>
+      <legend>Goods to Be Transported</legend>
+      <label for="transportmode">Choose Transport Mode: </label>
+      <select name="transportmode" id="transportmode" required>
+        <option value="Lorry">Lorry (Single Container)</option>
+        <option value="Lorry-Multi">Lorry (Multiple Container)</option>
+        <option value="Moderate-Vehicle">Trucks (Moderate Size)</option>
+        <option value="Small-Vehicle">Personal Vehicles</option>
+      </select>
+      <label for="price"></label>
+      <input type="text" name="price" id="price" placeholder="price in Rs." required>
+    </fieldset>
+    <button class="btn btn-primary my-3" type="submit">Create Order</button>
+  </form>
+</div>
+<script src="js/map.js"></script>
+<script src="https://unpkg.com/location-picker/dist/location-picker.min.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=<%= mapkey %> &callback=initMap">
+</script>
+<%- include("partials/footer"); -%>

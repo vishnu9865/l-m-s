@@ -1,0 +1,48 @@
+<%- include('partials/header'); %>
+<%- include('partials/navbar') %>
+<h1 class="text-center mb-3"><%= heading %></h1>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th rowspan="2">#</th>
+        <th rowspan="2">User</th>
+        <th colspan="2">From</th>
+        <th colspan="2">To</th>
+        <th rowspan="2">Transport</th>
+        <th rowspan="2">Cost</th>
+        <th rowspan="2">Status</th>
+        <th rowspan="2">Acc. User</th>
+      </tr>
+      <tr>
+        <th>Address</th>
+        <th>Coordinates</th>
+        <th>Address</th>
+        <th>Coordinates</th>
+      </tr>
+      <tbody>
+        <% let itr = 0; %>
+        <% orderlist.forEach( element => { %>
+            <tr>
+            <td><%= ++itr %></td>
+            <td><%= element.user %></td>
+            <td><%= element.fromlocationname %></td>
+            <td>Lat:<%= element.fromlatitude %><br>Lng:<%= element.fromlongitude %></td>
+            <td><%= element.tolocationname %></td>
+            <td>Lat:<%= element.tolatitude %><br>Lng:<%= element.tolongitude %></td>
+            <td><%= element.transportmode %></td>
+            <td>₹.<%= element.price %></td>
+            <td class="text-center">
+              <%= element.orderstatus %><br>
+              <% if( element.user != user.username && element.orderstatus == 'open') {%>
+                <a class="btn btn-success" href="/order/accept/<%=element._id%>">Accept</a>
+              <% } %>
+            </td>
+            <td><%= element.accepteduser %> </td>
+          </tr>
+        <% }); %> 
+      </tbody>
+    </thead>
+  </table>
+</div>
+<%- include('partials/footer'); %>
